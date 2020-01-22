@@ -48,7 +48,7 @@ p.park(8761)
 p.park(987634)
 
 '''
-# output
+             # output
 
 Please place the car in floor 1 spot 1
 Please place the car in floor 1 spot 2
@@ -65,5 +65,5 @@ Invalid car number
 Please place the car in floor 1 spot 2
 Please place the car in floor 1 spot 3
 Please place the car in floor 2 spot 3
-'''
 Sorry, Parking lot is full
+'''
