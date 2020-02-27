@@ -99,7 +99,7 @@ public class ParkingLot {
     }
     
 	public static void main (String[] args) {
-	ParkingLot p1 = new ParkingLot(1,1);
+	ParkingLot p1 = new ParkingLot(5,10);
         System.out.println("The number of free slots are " + p1.findFreeSpots());
         ParkingSpot ps1 = p1.getNextFreeSpot();
         System.out.println("The next free slot is at floor " + ps1.getFloor() + " and spot number " + ps1.getSpot());
