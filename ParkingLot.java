@@ -99,13 +99,13 @@ public class ParkingLot {
     }
     
 	public static void main (String[] args) {
-		ParkingLot p1 = new ParkingLot(1,1);
+	ParkingLot p1 = new ParkingLot(1,1);
         System.out.println("The number of free slots are " + p1.findFreeSpots());
         ParkingSpot ps1 = p1.getNextFreeSpot();
         System.out.println("The next free slot is at floor " + ps1.getFloor() + " and spot number " + ps1.getSpot());
         p1.park();
         System.out.println("The number of free slots are " + p1.findFreeSpots());
-        p1.unpark();
+        p1.unpark(ps1.getFloor(), ps1.getSpot());
         System.out.println("The number of free slots are " + p1.findFreeSpots());
 	}
 }
