@@ -1,3 +1,7 @@
+// Design a Parking Lot 
+// time: O(logN) 
+// space: O(n)
+
 class ParkingLot {
     // TODO: Priority Queue class in JavaScript needs to be implemented
     pq = new PriorityQueue((a, b) => {
