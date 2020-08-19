@@ -1,3 +1,6 @@
+// Time Complexity : for park(): O(log n) where n is the number of maxspots, for unpark: O(log n), for getNextAvailable: O(1), for addParkingspot: O(log n) for each of the calls
+// Space Complexity : O(n) for maintaining n pairs of Floors and Spots objects
+
 import java.io.*;
 import java.util.PriorityQueue;
 
