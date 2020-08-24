@@ -1,4 +1,13 @@
 class ParkingSpot:
+    """
+    
+    Name : Shahreen Shahjahan Psyche
+    Language Used : Python
+    Time : Park : O(1)
+           Unpark : log(N) [N is the size of the stack]
+    Space: O(N)
+    """
+    
     def __init__(self, level, spot):
         self.level = level
         self.spot = spot
