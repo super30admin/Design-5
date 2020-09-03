@@ -38,3 +38,44 @@ class Solution {
         return copy;
     }
 }
+
+//TC: O(n)
+//SC: O(n), please confirm if the space will be O(n) or not, as I am having n extra nodes in my list.
+class Solution {
+    public Node copyRandomList(Node head) {
+        Node curr = head;
+        if(head == null) return null;
+        //make copies and store next to the original node
+        while(curr!=null){
+            Node temp = curr.next;
+            Node currCopy = new Node(curr.val);
+            curr.next = currCopy;
+            currCopy.next = temp;
+            curr = currCopy.next;
+        }
+        
+        //populate random pointers
+        curr = head;
+        while(curr!=null){
+            if(curr.random!=null){
+                curr.next.random = curr.random.next;
+            }
+            curr = curr.next.next;
+        }
+        
+        //split the lists
+        curr = head;
+        Node copyHead = head.next;
+        Node copyCurr = copyHead;
+        
+        while(curr != null ){
+            curr.next = curr.next.next;
+            if(copyCurr.next != null){
+                copyCurr.next = copyCurr.next.next; 
+            }
+            curr = curr.next;
+            copyCurr = copyCurr.next;
+        }
+        return copyHead;
+    }
+}
