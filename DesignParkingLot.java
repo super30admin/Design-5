@@ -1,4 +1,4 @@
-// "static void main" must be defined in a public class.
+//TC: getNextAvailable: O(1), park/unpark: O(log(n)), n: number of floors * number of spots
 public class Main {
     public static void main(String[] args) throws Exception{
         ParkingLot pl = new ParkingLot(10,10);
