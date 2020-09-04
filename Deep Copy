@@ -46,3 +46,59 @@ class Solution {
         
     }
 }
+
+Approach 2 : Without Hashmpa solution
+Time COmplexity : O(N)
+Space Complexity : O(N)
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        if(head==null) return null;
+        // First pass Make copies and store next to each other
+        Node curr=head;
+        while(curr!=null){
+            Node temp=curr.next;
+            Node copycurr=new Node(curr.val);
+            curr.next=copycurr;
+            copycurr.next=temp;
+            curr=curr.next.next;
+        }
+        // second pass to populate random pointers of my copy list
+        curr=head ; // reset curr to head as we iterate through the ll again.
+        while(curr!=null){
+            if(curr.random!=null){
+                curr.next.random= curr.random.next;              
+            }
+            curr=curr.next.next;   // Come to the curr pointer to move on with iteration.            
+        }
+        // Third pass . Let's split the lists
+        curr=head;
+        Node copyhead=head.next;// Removing the original head 
+        Node currcopy=copyhead; // making the curr pointer as currcopy on copy list
+        while(curr!=null){
+            curr.next=curr.next.next;
+            if(currcopy.next != null){
+                currcopy.next=currcopy.next.next;
+            }
+            curr=curr.next;
+            currcopy=currcopy.next;
+            
+        }
+        return copyhead;         
+        
+    }
+}
