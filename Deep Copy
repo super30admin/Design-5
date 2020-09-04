@@ -1,0 +1,48 @@
+Approach 1 : Using Hashmap Solution.
+Time Complexity : O(N)
+Space Complexity : O(N) // Storing the copy node
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+class Solution {
+    HashMap<Node,Node> map; // Map of type Node to stor copy node
+    public Node copyRandomList(Node head) {
+        //Edge Case
+        if(head==null) return null;
+        map=new HashMap<>();
+        Node curr=head;
+        Node currCopy= clone(head);
+        while(curr!=null){
+            currCopy.next=clone(curr.next);
+            currCopy.random=clone(curr.random);
+            curr=curr.next;
+            currCopy=currCopy.next;
+        }
+        return map.get(head);
+        
+    }
+    private Node clone(Node node){
+        // Base Case
+        if(node==null) return null;
+        // Logic
+        if(map.containsKey(node)){
+            return map.get(node);
+        }
+        Node copynode=new Node(node.val);
+        map.put(node,copynode);
+        return copynode;
+        
+    }
+}
