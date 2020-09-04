@@ -82,7 +82,7 @@ class Problem2S1 {
     /** Clones a Node clones and the random pointer */
     private Node cloneNode(Node current){
 
-        // base casae
+        // base case
         if(current ==  null)
             return null;
         // create new node
