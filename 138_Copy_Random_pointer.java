@@ -11,7 +11,11 @@
         # Optimized approach: 
                               
             # 1. 
-                    A) 
+                    A) Create hashmap of all the nodes.
+                    B) while interating agin thru it do the follwoing.
+                            hm.get(node).next = hm.get(node.next);
+                            hm.get(node).random = hm.get(node.random); 
+                    C) At the end, return hm.get(head);
     */  
 
 
