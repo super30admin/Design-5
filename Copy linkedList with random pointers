@@ -1,0 +1,73 @@
+*/
+// Brute force: create deep copy of linkedList and set intially next pointers for the linkedList
+// for setting every random pointer traverse the original list to set random pointer for copied linkedList
+// hashmap approach : Time complexity : O(N): space O(N)
+/*class Solution {
+     HashMap<Node, Node> map;
+    public Node copyRandomList(Node head) {
+        map = new HashMap<>();
+        if(head == null) return null;
+        Node newNode = new Node(head.val, null, null);
+        map.put(head, newNode);
+        Node oldNode = head;
+        
+        while(oldNode != null){
+// while traversing the original linkedlist, there and then we are seting the clones for next and random pointers
+            newNode.next = clone(oldNode.next);
+            newNode.random = clone(oldNode.random);
+            newNode = newNode.next;
+            oldNode = oldNode.next;
+        }
+        return map.get(head);
+        
+    }
+    
+    public Node clone(Node node){
+        if(node != null){
+            if(map.containsKey(node)){
+                return map.get(node);
+            }
+            else{
+                Node newNode = new Node(node.val, null, null);
+                map.put(node, newNode);
+                return map.get(node);
+            }
+        }
+        return null;   
+    }
+}*/
+
+// time complexity : O(N)
+// space complexity: O(1)
+class Solution{
+   public Node copyRandomList(Node head) {
+       Node head1 = head;
+       if(head == null) return null;
+       while(head1 != null){ // A->A'->B ->B'->
+           Node newNode = new Node(head1.val, null, null);
+           newNode.next = head1.next;
+           head1.next = newNode;
+           head1 = head1.next.next;
+       }
+       
+       // setting the random pointers
+        head1 = head;
+       while(head1 != null){
+           head1.next.random = head1.random != null ? head1.random.next : null;
+           head1 = head1.next.next;
+       }
+       
+       //unweave the pointers
+       Node ptr1 = head;
+       Node ptr2 = head.next;
+       Node node = ptr2;
+       while(ptr1 != null && ptr2 != null){
+           ptr1.next = ptr1.next.next;
+           ptr2.next = ptr2.next != null ? ptr2.next.next : null;
+           ptr1 = ptr1.next;
+           ptr2 = ptr2.next;
+       }
+       return node;
+    
+   }
+}
