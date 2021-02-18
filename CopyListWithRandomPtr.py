@@ -1,3 +1,20 @@
+'''
+    Time Complexity:
+        O(n) (where n = number of nodes)
+
+    Space Complexity:
+        O(n) (where n = number of nodes)
+
+    Did this code successfully run on LeetCode?:
+        Yes
+
+    Problems faced while coding this:
+        None
+
+    Approach:
+        Keep a mapping of {old_node: new_node} in a HashMap.
+'''
+
 """
 # Definition for a Node.
 class Node:
