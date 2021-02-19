@@ -27,6 +27,9 @@ class ParkingSpot:
             return self.spot < other.spot
         return self.floor < other.floor
 
+    def __str__(self):
+        return 'Parked at Floor: {}, Spot: {}'.format(self.floor, self.spot)
+
 class ParkingLot:
     def __init__(self, max_floors, spots_per_floor):
         self.max_floors = max_floors
@@ -72,15 +75,12 @@ def main():
     pl.add_parking_spot(2, 2)
     pl.add_parking_spot(3, 2)
 
-    n1 = pl.get_next_available()
-    print('Parked at Floor: {}, Spot: {}'.format(n1.floor, n1.spot))
+    print(pl.get_next_available())
 
     pl.park()
-    n2 = pl.get_next_available()
-    print('Parked at Floor: {}, Spot: {}'.format(n2.floor, n2.spot))
+    print(pl.get_next_available())
 
     pl.unpark(1, 1)
-    n3 = pl.get_next_available()
-    print('Parked at Floor: {}, Spot: {}'.format(n3.floor, n3.spot))
+    print(pl.get_next_available())
 
 main()
