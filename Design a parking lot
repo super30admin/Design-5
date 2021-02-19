@@ -1,0 +1,87 @@
+import heapq
+
+class Parkingspot:
+    def __init__(self, floor, spot):
+        self.floor = floor;
+        self.spot = spot;
+
+    def getFloor(self):
+        return self.floor;
+
+    def getSpot(self):
+        return self.spot;
+
+
+class Parkinglot:
+    def __init__(self, maxfloors, maxspots):
+        self.maxfloors = maxfloors;
+        self.maxspots = maxspots;
+        self.queue = []
+        heapq.heapify(self.queue);
+
+    # function to add parking spot
+    def addparkingspot(self, floor, spot):
+        pspot = Parkingspot(floor, spot);
+        heapq.heappush(self.queue, [floor, spot])
+        return pspot;
+
+    def nextavailablespot(self):
+        if(self.queue):
+            return self.queue[0]
+        else:
+            return None, None
+
+    # function to park the vehicle
+    def park(self):
+        if(self.queue):
+            heapq.heappop(self.queue);
+
+
+
+    # function to unpark the vehicle
+    def unpark(self, floor, spot):
+        heapq.heappush(self.queue, [floor, spot]);
+
+
+class Solution:
+    def __init__(self):
+
+        # create an object for parking lot
+        parkinglotobject = Parkinglot(5,5);
+
+        # add parking spot to parking lot
+        parkinglotobject.addparkingspot(1,1)
+        # add parking spot to parking lot
+        parkinglotobject.addparkingspot(2, 2)
+        # add parking spot to parking lot
+        parkinglotobject.addparkingspot(3, 3)
+
+        # check for next available spot
+        floor, spot = parkinglotobject.nextavailablespot();
+        print('next availble floor and spot to park', floor, spot);
+        parkinglotobject.park()
+
+
+        # check for next available spot
+        floor, spot = parkinglotobject.nextavailablespot();
+        print('next availble floor and spot to park', floor, spot);
+
+        parkinglotobject.park()
+
+        # unpark the vehicle at floor 1 and spot 1
+        parkinglotobject.unpark(1,1);
+        
+        # check for next available spot
+        floor, spot = parkinglotobject.nextavailablespot();
+        print('next availble floor and spot to park', floor, spot);
+        parkinglotobject.park()
+
+obj = Solution()
+
+
+
+
+
+
+
+

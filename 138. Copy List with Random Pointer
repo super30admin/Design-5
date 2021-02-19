@@ -1,0 +1,58 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+
+class Solution:
+    def __init__(self):
+        # initialize the dictionary to store node as key and it's copy as value
+        self.dict = {}
+    
+    # method to clone the node 
+    def clone(self, node):
+        # if copy of node is already created
+        # return the copy
+        if(node in self.dict):
+            return self.dict[node]
+        # if the the copy of node is not created yet
+        # create a new node
+        self.dict[node] = Node(node.val);
+        return self.dict[node];
+    
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        if(not head):
+            return None;
+        # initialize the head of the given linkedlist to curr
+        curr = head ;
+        # createt the clone of the head node
+        newhead = self.clone(curr);
+        currcopy = newhead
+        curr = curr.next;
+        # iterate through the entire linkedlist
+        while(curr):
+            newnode = self.clone(curr);
+            currcopy.next = newnode;
+            curr = curr.next;
+            currcopy = currcopy.next;
+        
+        currcopy = newhead;
+        curr = head
+        # map the random pointers for the deep copy linked list 
+        while(curr and currcopy):
+            if(curr.random):
+                currcopy.random = self.dict[curr.random];
+            curr = curr.next;
+            currcopy = currcopy.next;
+        return newhead;
+    '''
+    run time complexity = O(n)
+    space complexity = O(n)
+    '''
+            
+            
+            
+        
