@@ -43,3 +43,4 @@ class Solution {
         return list.next;
     }
 }
+//Method without taking the extra space.
