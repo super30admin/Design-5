@@ -42,5 +42,39 @@ class Solution:
                 fast.next = slow.next
                 fast = fast.next
         return deep
-            
+
+'''
+T = O(n)
+S = O(n)
+Approach:
+Traverse and maintain a clone linked list and maintain a hashmap  to check if the clone node is already created return the deep copy to the man node
+'''
+
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+
+class Solution:
+    hashmap = {}
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        if head == None: return head
+        copyHead = self.clone(head)
+        curr = head
+        currCopy = copyHead
+        while curr:
+            currCopy.next = self.clone(curr.next)
+            currCopy.random = self.clone(curr.random)
+            curr = curr.next
+            currCopy = currCopy.next
+        return copyHead
+
+    def clone(self, node):
+        if node== None: return None
+        if node in self.hashmap:
+            return self.hashmap[node]
+        newNode = Node(node.val)
+        self.hashmap[node] = newNode 
+        return newNode
         
