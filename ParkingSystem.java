@@ -4,19 +4,16 @@ import java.util.*;
 //New car should be placed in lowest available and lowest available slot.
 //For example: if the floor 1 and floor9 slots are available.
 //Then it should park in the first floor not the 9th one.
+//https://leetcode.com/playground/cxvCgX8r
 
 public class ParkingSystem {
 
     int floors;
     int spots;
     
-    PriorityQueue<ParkingSlot> pq = new PriorityQueue<ParkingSlot>((a,b) ->{
-        if(a.floor == b.floor) {
-            return (a.spot - b.spot);
-        } else {
-            return (a.floor - b.floor);
-        }
-    });
+  PriorityQueue<ParkingSlot> pq = new PriorityQueue<ParkingSlot>((a,b)-> {
+        return a.floor - b.floor;
+  });
     
     public ParkingSystem(int floors, int spots) {
         this.floors = floors;
