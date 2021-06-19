@@ -15,6 +15,9 @@ public class CopyList {
         return newNode;
     }
     
+
+    //TC: O(N) - Traversing all the old list and creating a new list.
+    //SC: O(N) - HashMap to save the pointers.
     public Node copyRandomList(Node head) {
         if(head == null) return head;
         
