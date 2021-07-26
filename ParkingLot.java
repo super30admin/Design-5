@@ -1,5 +1,5 @@
-// "static void main" must be defined in a public class.
-// SC O(M*N) - Total number of elements in priority queue. TC O(log(m*n)) where m*n is the total elements in Priority queue
+// Time complexity O(log(m*n)) where m*n is the total elements in Priority queue.
+// Space complexity O(M*N) - Total number of elements in priority queue. 
 public class Main {
     
     private static class ParkingLot {
