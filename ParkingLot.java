@@ -50,21 +50,20 @@ public class ParkingLot {
             lot.addParkingSpot(7, 10);
             lot.addParkingSpot(2, 16);
             ParkingSpot spot = lot.getNextAvailable();
-            System.out.println("Parked at floor \'" + spot.getFloor() + "\' and spot \'" + spot.getSpot()
-                    + "\'.");
+            System.out.println("Parked at floor " + spot.getFloor() + " and spot " + spot.getSpot()
+                   );
             lot.park();
 
             spot = lot.getNextAvailable();
-            System.out.println("Parked at floor \'" + spot.getFloor() + "\' and spot \'" + spot.getSpot()
-                    + "\'.");
+            System.out.println("Parked at floor " + spot.getFloor() + " and spot " + spot.getSpot()
+                    );
             lot.park();
 
             spot = lot.getNextAvailable();
-            System.out.println("Parked at floor \'" + spot.getFloor() + "\' and spot \'" + spot.getSpot()
-                    + "\'.");
+            System.out.println("Parked at floor " + spot.getFloor() + " and spot " + spot.getSpot()
+                     );
             lot.park();
-
-            System.out.println("Unparking Floor 0 Spot 13.");
+            System.out.println("Unparking Floor: 0 Spot: 13");
             lot.unpark(0, 13);
         } catch (Exception e) {
             e.printStackTrace();
