@@ -1,0 +1,4 @@
+// Key datastructure used here is min heap because of the given condition nearest to gate must be first so based on heap property when
+//any car enters then it can only be logn . And for storing car place we can use a hashmap of carnumber and slot number.
+//Time complexity:- O(logn).
+//Spacecomplexity:-O(2N).
