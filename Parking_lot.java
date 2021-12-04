@@ -66,3 +66,6 @@ class ParkingSpot{
         return this.floor;
     }
 }
+
+
+//TC: O(1) & O(log N)
