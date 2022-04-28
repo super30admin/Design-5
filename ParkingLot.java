@@ -34,7 +34,7 @@ class ParkingLot {
 
   int floors;
   int spotsPerFloor;
-  Set<ParkingSpot> availableSpots;
+  Set<ParkingSpot> availableSpots; // going with the assumption parking can happen in any random order in the lot.
   public ParkingLot(int floors, int spotsPerFloor) {
     this.floors = floors;
     this.spotsPerFloor = spotsPerFloor;
