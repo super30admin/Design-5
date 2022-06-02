@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class Problem2 {
 
     // Definition for a Node.
@@ -12,6 +14,7 @@ public class Problem2 {
             this.random = null;
         }
     }
+
     // TC : O(n)
     // SC : O(1)
     public Node copyRandomList(Node head) {
@@ -43,5 +46,34 @@ public class Problem2 {
             copyCurr = copyCurr.next;
         }
         return copyHead;
+    }
+
+    // HashMap solution
+    // TC : O(n)
+    // SC : O(n)
+    HashMap<Node, Node> map;
+
+    public Node copyRandomList1(Node head) {
+        if (head == null) return null;
+        map = new HashMap<>();
+        Node copyHead = clone(head);
+        Node curr = head;
+        Node copyCurr = copyHead;
+
+        while (curr != null) {
+            copyCurr.next = clone(curr.next);
+            copyCurr.random = clone(curr.random);
+            curr = curr.next;
+            copyCurr = copyCurr.next;
+        }
+        return copyHead;
+    }
+
+    private Node clone(Node node) {
+        if (node == null) return null;
+        if (map.containsKey(node)) return map.get(node);
+        Node copyNode = new Node(node.val);
+        map.put(node, copyNode);
+        return copyNode;
     }
 }
