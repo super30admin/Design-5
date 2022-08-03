@@ -37,7 +37,7 @@ class ParkingLot:
     def __init__(self):
         self.pq = []
 
-    def park(self):
+    def park(self):  # TC O(logN)
         spot = self.getNextAvailable()
         if spot is None: 
             raise Exception("Parking Lot is Full.")
@@ -46,7 +46,7 @@ class ParkingLot:
         return spot
 	
 	
-    def unpark(self, floor, slot):
+    def unpark(self, floor, slot):  # TC O(logN)
         spot = self.ParkingSpace(floor, slot)
         if spot not in self.pq:
             hq.heappush(self.pq,spot)
@@ -55,10 +55,10 @@ class ParkingLot:
 
     def addParkingSpace(self,floor, slot):
         spot = self.ParkingSpace(floor, slot)
-        hq.heappush(self.pq,spot)
+        hq.heappush(self.pq,spot) # TC O(logN)
 
 	
-    def getNextAvailable(self):
+    def getNextAvailable(self): # TC O(1)
         if(len(self.pq) > 0):
             return self.pq[0]
 	
