@@ -1,5 +1,11 @@
 import heapq as hq
 
+'''
+You maintain a heap of parking spots available with (floor, spot)
+If you unpark -> push into heap 
+if you park -> pop from heap
+'''
+
 class ParkingLot:
     maxFloors = 5
     maxSlotsPerFloor = 10
