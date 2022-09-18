@@ -22,7 +22,7 @@ class Parking {
         parking.park();
         n = parking.getNextAvailable();
         System.out.println("Floor: " + n.getFloor() + ", Slot: " + n.getSpot());
-        parking.unpark(1, 1);
+        parking.unpark(1, 11);
         n = parking.getNextAvailable();
         System.out.println("Floor: " + n.getFloor() + ", Slot: " + n.getSpot());
 	}
