@@ -1,0 +1,66 @@
+"""
+Time Complexity : O(3n) where n is the total number of nodes. 3n because 
+                    we need to iterate to 
+                    1. All the nodes to create a deep copy 
+                    2. To create a random pointer
+                    3. To split the linkedList
+
+Space Complexity : O(1) as no auxillary data structure used
+
+Did this code successfully run on Leetcode : Yes
+Any problem you faced while coding this : No
+
+Your code here along with comments explaining your approach:
+1. Create a deep copy and place it at next to the existing Node
+2. Assign the Random pointer
+3 Split the LinkedList
+"""
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if head == None:
+            return None
+        curr = head
+        copyHead = Node(head.val)
+        copyCurr = copyHead
+        #1. Create a deep copy and place it at next to the existing Node
+        while(curr != None):
+            copyCurr = Node(curr.val)
+            copyCurr.next = curr.next
+            curr.next = copyCurr
+            curr = curr.next.next
+            
+        #2. Assign the Random pointer
+        curr = head
+        copyHead = curr.next
+        copyCurr = copyHead
+        while(curr != None):
+            if curr.random != None:
+                copyCurr.random = curr.random.next
+            if copyCurr.next != None:
+                copyCurr = copyCurr.next.next
+            curr = curr.next.next
+        
+        #3 Split the LinkedList
+        curr = head
+        copyHead = curr.next
+        copyCurr = copyHead
+        while(curr != None):
+            curr.next = curr.next.next
+            if copyCurr.next != None:
+                copyCurr.next = copyCurr.next.next
+            curr = curr.next
+            copyCurr = copyCurr.next
+        
+        return copyHead
+            
+
+
