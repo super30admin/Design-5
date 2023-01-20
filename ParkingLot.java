@@ -1,4 +1,4 @@
-//TC:nlogn
+//TC:logn
 //SC: o(n)
 //n -> number of floors*slots
 
