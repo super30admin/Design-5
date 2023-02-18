@@ -1,0 +1,68 @@
+
+class Solution {
+  
+  static class parkingSpot{
+      int floor;
+      int spot;
+      
+      public parkingSpot(int floor, int spot){
+          this.floor = floor;
+          this.spot = spot;
+      }
+      
+      public int getSpot(){
+          return this.spot;
+      }
+      
+       public int getFloor(){
+          return this.floor;
+      }
+      
+  }
+  
+  public static class parkingLot{
+      
+      int maxFloor;
+      int maxSpot;
+      PriorityQueue<parkingSpot> pq = new PriorityQueue<>((a,b) -> {
+          if(a.floor == b.floor) return a.spot - b.spot;
+          return a.floor - b.floor;
+          });
+      public parkingLot( int maxFloor,  int maxSpot){
+          this.maxFloor = maxFloor;
+          this.maxSpot = maxSpot;
+      }
+      
+       //Timecomplexity O(log(n))
+      
+      public void addSpot(int floor, int spot){
+          
+          if(floor > maxFloor )return new IllegalArgumentException("Floor Exceeded");
+          
+           if(spot > maxSpot )return new IllegalArgumentException("Spot Exceeded");
+          parkingSpot newSpot = new parkingSpot(floor,spot);
+          pq.add(newSpot);
+      }
+      
+      //Timecomplexity O(1)
+      
+      public parkingSpot getNextAvailable(){
+          if(!pq.isEmpty()) return new IllegalArgumentException("No available spots")
+          return pq.peek();
+      }
+       //Timecomplexity O(1)
+      
+       public parkingLot park(){
+          return pq.poll();
+      }
+      
+       //Timecomplexity O(1)
+      
+      public parkingLot unPark(int floor, int spot){
+           parkingSpot newSpot = new parkingSpot(floor,spot);
+             pq.add(newSpot);
+           
+          
+      }
+  }  
+}
