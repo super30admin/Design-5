@@ -42,7 +42,7 @@ public class CopyListWithRandom {
         Node copyHead = head.next;
         Node copyCurr = curr.next;
 
-        while(curr != null) {
+        while(true) {
             curr.next = copyCurr.next;
             if(copyCurr.next == null) break;
             copyCurr.next = copyCurr.next.next;
