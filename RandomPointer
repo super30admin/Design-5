@@ -1,0 +1,46 @@
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+// Time Complexity o(n) Space Complexity o(1);
+class Solution {
+    public Node copyRandomList(Node head) {
+      Node curr = head;
+      if(head==null) return null;
+      while(curr!=null){
+          Node newNode = new Node(curr.val);
+          newNode.next=curr.next;
+          curr.next=newNode;
+          curr=curr.next.next;
+      } 
+      curr=head;
+      Node copyHead=head.next;
+      Node cc = head.next;
+      while(curr!=null){
+          if(curr.random!=null){
+              cc.random=curr.random.next;
+          }
+          curr=curr.next.next;
+          if(cc.next!=null) cc=cc.next.next;
+      }  
+      curr=head;
+      cc=head.next;
+      while(curr!=null){
+          curr.next=curr.next.next;
+         if(cc.next!=null) cc.next=cc.next.next;
+          curr=curr.next;
+          cc=cc.next;
+      }
+      return copyHead;
+    }
+}
