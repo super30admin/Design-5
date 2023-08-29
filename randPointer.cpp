@@ -21,24 +21,25 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        if (head == nullptr) return nullptr;
+        if (head == nullptr) 
+        return nullptr;
         
-        unordered_map<Node*, Node*> nodeMap;
+        unordered_map<Node*, Node*> Map;
         Node* curr = head;
 
         while (curr != nullptr) {
-            nodeMap[curr] = new Node(curr->val);
+            Map[curr] = new Node(curr->val);
             curr = curr->next;
         }
 
         curr = head;
         while (curr != nullptr) {
-            nodeMap[curr]->next = nodeMap[curr->next];
-            nodeMap[curr]->random = nodeMap[curr->random];
+            Map[curr]->next = Map[curr->next];
+            Map[curr]->random = Map[curr->random];
             curr = curr->next;
         }
 
-        return nodeMap[head];
+        return Map[head];
         
     }
 };
