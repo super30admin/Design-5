@@ -16,6 +16,56 @@ class Node {
 // Time Complexity:  O(n)
 // Space Complexity: O(n)
 
+
+
+// ******************** Iterating once ********************
+
+class Solution {
+
+    Map<Node, Node> oldToNewNodes;
+    
+    public Node copyRandomList(Node head) {
+        
+        Node dummyHead = new Node(-1);
+        oldToNewNodes = new HashMap<>();            // creating map from old node to new node
+
+        Node curr = copy(head);
+        dummyHead.next = curr;
+        
+        while(head != null) {
+
+            curr.next = copy(head.next);            // updating next pointer
+            curr.random = copy(head.random);        // updating random pointer
+
+            head = head.next;
+            curr = curr.next;
+        
+        }
+
+        return dummyHead.next;
+
+    }
+
+    private Node copy(Node node) {
+        if(node == null) return null;
+        if(oldToNewNodes.containsKey(node)) {        // if mapping is already there
+            return oldToNewNodes.get(node);
+        }
+        Node newNode = new Node(node.val);           // if not, create new node
+        oldToNewNodes.put(node, newNode);            // and create mapping
+        return newNode;
+    }
+
+}
+
+
+
+
+
+
+
+// ******************** Iterating twice ********************
+
 class Solution {
     
     public Node copyRandomList(Node head) {
