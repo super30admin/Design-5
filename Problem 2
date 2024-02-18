@@ -1,0 +1,36 @@
+Copy List with Random Pointer
+
+#This solution has a time complexity of O(N), where N is the number of nodes in the original linked list. This is because we traverse the original linked list twice. 
+#The space complexity is also O(N) because we use a hash table to store mappings of original nodes to their copies.
+
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if not head:
+            return None
+        
+        # Step 1: Create copies of nodes and map original nodes to their copies
+        node_map = {}
+        curr = head
+        while curr:
+            node_map[curr] = Node(curr.val)
+            curr = curr.next
+        
+        # Step 2: Update next and random pointers of copy nodes
+        curr = head
+        while curr:
+            copy_node = node_map[curr]
+            if curr.next:
+                copy_node.next = node_map[curr.next]
+            if curr.random:
+                copy_node.random = node_map[curr.random]
+            curr = curr.next
+        
+        # Step 3: Return the head of the copied linked list
+        return node_map[head]
