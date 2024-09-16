@@ -1,0 +1,20 @@
+Declaration:
+PriorityQueue of tuple <parkinglotId,distance> arranged as per distance.
+HashSet<parkingLotId> // this is for checking what all spaces are filled.
+
+Approach:
+
+Initially, put tuple <parkingLotId,distance> of all the parking lot in a priority queue arranged as per distance.
+Now, 
+As and when a new car enters, pop an elementfrom the priority queue.
+At the same time, put this poped tuples parkingId in the HashSet.
+
+As and when a car leaves the parking lot, insert the tuple <parkingLotId,dstance> in the PriorityQueue.
+At the same time, remove the parkingLotId  from the hashset.
+
+Time Complexity:
+log(n) --> for each entry.
+log(n) --> for each exit.
+finding if a space is occupied --> O(1).
+
+
