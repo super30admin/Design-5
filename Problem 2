@@ -1,0 +1,46 @@
+Time:O(n)
+Space:O(1)
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        if (head == null) return null;
+
+        Node curr = head;
+        while (curr != null) {
+            Node copyNode = new Node(curr.val);
+            copyNode.next = curr.next;
+            curr.next = copyNode;
+            curr = copyNode.next; 
+        }
+
+        curr = head;
+        Node copyHead = head.next;
+        Node copyCurr = copyHead;
+
+        
+        while (curr != null) {
+            if (curr.random != null) {
+                copyCurr.random = curr.random.next;
+            }
+            curr = copyCurr.next; 
+            if (copyCurr.next != null) {
+                copyCurr = copyCurr.next.next; 
+            }
+        }
+
+        curr = head;
+        copyCurr = copyHead;
+
+        while (curr != null) {
+            curr.next = curr.next.next; 
+            if (copyCurr.next != null) {
+                copyCurr.next = copyCurr.next.next; 
+            }
+            curr = curr.next; 
+            copyCurr = copyCurr.next; 
+        }
+
+        return copyHead; 
+    }
+}
+
