@@ -1,0 +1,42 @@
+//Timecomplexity:- O(4n0 which is O(n).
+//Spacecomplexity :- O(1).
+//Did it run on leetcode:- Yes.
+//What problems did you face while coding?;- Got failed at some edge cases.
+//Your approach with code :- basically first creating a linked list which contains first node as orginal and second node to be it's copy.
+//Next random pointers are changed accordingly and this list is splitted.
+class Solution {
+    public Node copyRandomList(Node head) {
+        if(head==null){
+            return null;
+        }
+        Node current=head;
+        while(current!=null){
+            Node copycurrent=new Node(current.val);
+            copycurrent.next=current.next;
+            current.next=copycurrent;
+            current=current.next.next;
+        }
+        current=head;
+        while(current!=null){
+            if(current.random!=null){
+                current.next.random=current.random.next;
+                
+            }
+            current=current.next.next;
+        }
+        current=head;
+        Node coppycurrent=head.next;
+        Node head1 = coppycurrent;
+        while(current!=null){
+            current.next=current.next.next;
+            if(coppycurrent.next!=null){
+                coppycurrent.next=coppycurrent.next.next;
+                
+            }
+            current=current.next;
+            coppycurrent=coppycurrent.next;
+        }
+        return head1;
+        
+}
+}
