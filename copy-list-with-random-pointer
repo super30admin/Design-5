@@ -1,0 +1,166 @@
+// Time Complexity :O(2n)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach: 2 pass solutions where first copied the all original nodes by assigning next pointers to it as per the given list and storing orgNode and copynode into map.
+// int second pass assigning random pointers to copynodes as per given list by getting new copynode from hashmap
+
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        if (head == null) {
+            return head;
+        }
+        Node orgNode = head; // current orgNode of head
+        Node copyNode = new Node(orgNode.val); // new copyNode of orginalNode
+        Node copyHead = copyNode; // storing copyNode head into copyHead
+        HashMap<Node, Node> map = new HashMap<>(); // S.C:O(n) To map originalNode - copyNode
+        map.put(orgNode, copyHead); // adding orgNode and corresponding copyHead
+        while (orgNode.next != null) { // T.C:O(n) // till end point
+            copyNode.next = new Node(orgNode.next.val); // assign next to copyNode as orgNode next
+            orgNode = orgNode.next; // moving orgNode pointer
+            copyNode = copyNode.next; // moving copyNode pointer
+            map.put(orgNode, copyNode); // putting orgNode -copyNode for relation mapping
+        }
+        copyNode = copyHead; // moving copyNode to its head
+        orgNode = head; // moving orgNode pointer to its head
+        while (orgNode != null) { // T.C:O(n)
+            copyNode.random = map.get(orgNode.random);
+            orgNode = orgNode.next; // moving pointer to next
+            copyNode = copyNode.next;// moving pointer to next
+        }
+        return copyHead; // head of copyNode
+    }
+}
+
+
+
+
+
+// Time Complexity :O(n)
+// Space Complexity :O(n)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach:single pass solution while assigning next nodes checking the random nodes if both are not exist in the map then first adding those new copy and orgNode relation to the ma and then adding it to copy node next adn random pointers
+
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        if (head == null) {
+            return head;
+        }
+        Node orgNode = head; // current orgNode of head
+        Node copyNode = new Node(orgNode.val); // new copyNode of orginalNode
+        Node copyHead = copyNode; // storing copyNode head into copyHead
+        HashMap<Node, Node> map = new HashMap<>(); // S.C:O(n) To map originalNode - copyNode
+        map.put(orgNode, copyHead); // adding orgNode and corresponding copyHead
+        while (orgNode != null) { // T.C :O(n)
+            if (!map.containsKey(orgNode.random)) { // if random node of org does not exist in map
+                if (orgNode.random != null) {
+                    Node rNode = new Node(orgNode.random.val); // creating copy node for org random
+                    map.put(orgNode.random, rNode); // adding orgNode.random and its copy node
+                }
+            }
+            if (!map.containsKey(orgNode.next)) { // if org node next node does not exist in the map
+                if (orgNode.next != null) {
+                    Node nNode = new Node(orgNode.next.val);// create new code of org.next
+                    map.put(orgNode.next, nNode); // adding org.next and corresponding copynode
+                }
+            }
+            copyNode.random = map.get(orgNode.random);
+            copyNode.next = map.get(orgNode.next);
+            orgNode = orgNode.next; // moving orgNode pointer
+            copyNode = copyNode.next;// moving copyNode pointer
+        }
+        return copyHead; // head of copyNode
+    }
+}
+
+
+//no space solution
+// Time Complexity :O(3n)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach: optimized space by using 3 pass solution where first create new copy node of each orgnode and made copynode as next node for orgNode and orgNode next becomes copyNode next then assigning the random nodes to it as per given list then demerge the two lists by removing the connection between org and copynodes by passing two pointers 
+
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        if (head == null) {
+            return head;
+        }
+        Node orgNode = head; // current orgNode of head
+
+        while (orgNode != null) { // T.C:O(n) creating new node of org nd assigning next pointer to it
+            Node copyNode = new Node(orgNode.val);// new copyNode of orgNode
+            copyNode.next = orgNode.next; // making orgNode next as copynode next
+            orgNode.next = copyNode; // then copynode next becomes orgnode next
+            orgNode = orgNode.next.next; // moving orgNode pointer
+        }
+        orgNode = head; // placing orgNode pointer at head
+
+        while (orgNode != null) { //// T.C:O(n) pointing random pointers to copied nodes
+            if (orgNode.random != null) { // if random of orgnode is not null
+                orgNode.next.random = orgNode.random.next;
+            }
+            orgNode = orgNode.next.next; // moving orgNode pointer to next orgNode in the list
+        }
+        orgNode = head;// resetting orgNode to its head
+        Node copyHead = orgNode.next;
+        Node copyNode = orgNode.next; // starting copyHead at orgNode.next
+        // seperating the two lists
+        while (orgNode != null) {// T.C:O(n)
+            orgNode.next = orgNode.next.next;
+            if (copyNode.next != null) {
+                copyNode.next = copyNode.next.next;
+            }
+            // moving two pointers
+            orgNode = orgNode.next;
+            copyNode = copyNode.next;
+        }
+        return copyHead; // head of copyNode
+    }
+}

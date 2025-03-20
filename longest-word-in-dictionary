@@ -1,0 +1,115 @@
+// Time Complexity :O(N*l) + O(l) ->O(N*l)
+// Space Complexity :O(l)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach:Trie with DFS backtrasking solution
+
+class Solution {
+    class TrieNode {
+        TrieNode[] children;
+        boolean isEnd;
+
+        public TrieNode() {
+            this.children = new TrieNode[26];
+        }
+    }
+
+    public void insert(TrieNode root, String word) { // inserting all the words into trie and marking word end as true
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            if (root.children[ch - 'a'] == null) {
+                root.children[ch - 'a'] = new TrieNode();
+            }
+            root = root.children[ch - 'a'];
+        }
+        root.isEnd = true;
+    }
+
+    String max = "";
+
+    public String longestWord(String[] words) {
+        TrieNode root = new TrieNode(); //initilizing trie with 26 char length of array
+        for (String word : words) {//O(N)->n*l
+            insert(root, word); //inserting into trie
+        }
+        StringBuilder path = new StringBuilder(); // to append each char from word
+        backtracking(root, path); //recursion with backtraking
+        return max;
+    }
+
+    public void backtracking(TrieNode root, StringBuilder path) {//O(l)-> length of longest word
+        if (path.length() > max.length()) {//where the length of path becomes greater than max string length
+            max = path.toString();
+        }
+         // action
+        for (int i = 0; i < 26; i++) { // as we have 26length array for each char at children
+            if (root.children[i] != null && root.children[i].isEnd) { 
+                int le = path.length();
+                path.append((char) (i + 'a'));// converting ascii code into corresponding char
+                // recurse
+                backtracking(root.children[i], path);
+                // backtrack
+                path.setLength(le);
+            }
+        }
+
+    }
+}
+
+// Time Complexity :O(N*l)+ O(N*l) where inserting N words into trie for each word of length l so creating n nodes of length l and for bfs itterating over N nodes with length l
+// Space Complexity :O(N*l)+ O(N*l) where for stroing N nodes of length l into trie is O(N*l) and again for queue storing N nodes O(N) and another queue for storing  word it takes O(l)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+
+// Your code here along with comments explaining your approach:
+
+
+class Solution {
+    class TrieNode {
+        TrieNode[] children;
+        boolean isEnd;
+
+        public TrieNode() {
+            this.children = new TrieNode[26];
+        }
+    }
+
+    public void insert(TrieNode root, String word) {
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            if (root.children[ch - 'a'] == null) {
+                root.children[ch - 'a'] = new TrieNode();
+            }
+            root = root.children[ch - 'a'];
+        }
+        root.isEnd = true;
+    }
+
+    String max = "";
+
+    public String longestWord(String[] words) {
+        TrieNode root = new TrieNode();
+        for (String word : words) {// O(N)->n*l
+            insert(root, word);
+        }
+        Queue<TrieNode> qe = new LinkedList<>();
+        Queue<String> sQ = new LinkedList<>();
+        qe.add(root);
+        sQ.add("");
+        String currStr = "";
+        while (!qe.isEmpty()) {
+              TrieNode curr = qe.poll();
+                currStr = sQ.poll();
+            for (int i = 25; i >= 0; i--) {
+               if (curr.children[i] != null && curr.children[i].isEnd) {
+                    qe.add(curr.children[i]);
+                    String newSt = currStr + (char) ('a' + i);
+                    sQ.add(newSt);
+                }
+            }
+        }
+        return currStr;
+    }
+
+}
