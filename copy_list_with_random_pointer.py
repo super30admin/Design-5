@@ -295,7 +295,7 @@ def copyRandomList_2(head: 'Optional[Node]') -> 'Optional[Node]':
     return h[head]
 
 
-
+# works
 # def copyRandomList_3(head: 'Optional[Node]') -> 'Optional[Node]':
 #     ''' Solution #3
 #         Time: O(N), Space: O(1)
